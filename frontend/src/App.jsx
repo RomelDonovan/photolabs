@@ -8,7 +8,7 @@ import './App.scss';
 const App = () => {
   return (
     <div className="App">
-      <HomeRoute />
+      <HomeRoute photos={photos} topics={topics}/>
     </div>
   );
 };
