@@ -59,7 +59,7 @@ const info = sampleDataForPhotoList
 
 const PhotoList = () => {
   return (
-    <ul>
+    <ul className="photo-list">
       {info.map(data => <PhotoListItem key={data.id} {...data} />)}
     </ul>
   );
