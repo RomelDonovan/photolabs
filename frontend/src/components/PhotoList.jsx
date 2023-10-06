@@ -6,7 +6,7 @@ const PhotoList = (props) => {
   const [...data] = props.photos.map(photo => photo);
   return (
     <ul className="photo-list">
-      {[...data].map(data => <PhotoListItem key={data.id} {...data} />)}
+      {[...data].map(data => <PhotoListItem key={data.id} {...data} setFav={props.setFav} />)}
     </ul>
   );
 };
