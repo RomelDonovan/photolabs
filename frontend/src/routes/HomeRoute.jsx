@@ -17,7 +17,7 @@ const HomeRoute = (props) => {
       <PhotoList photos={photos}
         setFav={setFav}
         setModalVisible={setModalVisible} />
-        {modalVisible && <PhotoDetailsModal/>}
+      {modalVisible && <PhotoDetailsModal setModalVisible={setModalVisible} />}
     </div>
   );
 };
