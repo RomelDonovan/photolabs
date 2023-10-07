@@ -3,21 +3,21 @@ import "../styles/PhotoListItem.scss";
 import PhotoFavButton from "./PhotoFavButton";
 
 const PhotoListItem = (props) => {
-  const {location, urls, user, setFav} = props
+  const { photo, toggleFav, setModalVisible, fav } = props
   const handleClick = () => {
-    props.setModalVisible(true);
+    setModalVisible(photo);
   }
 
   return (
     <div className="photo-list__item">
-      <PhotoFavButton setFav={setFav} />
-      <img src={urls.regular} alt="" className="photo-list__image" onClick={handleClick} />
+      <PhotoFavButton toggleFav={toggleFav} photoId={photo.id} fav={fav} />
+      <img src={photo.urls.regular} alt="" className="photo-list__image" onClick={handleClick} />
       <div className="photo-list__user-details">
-      <img src={user.profile} alt="" className="photo-list__user-profile" />
-      <p className="photo-list__user-info">
-      {user.name}
-      <span className="photo-list__user-location">{location.city}, {location.country}</span>
-      </p>
+        <img src={photo.user.profile} alt="" className="photo-list__user-profile" />
+        <p className="photo-list__user-info">
+          {photo.user.name}
+          <span className="photo-list__user-location">{photo.location.city}, {photo.location.country}</span>
+        </p>
       </div>
     </div>
   )
