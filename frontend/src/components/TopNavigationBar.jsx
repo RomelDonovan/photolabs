@@ -4,12 +4,13 @@ import FavBadge from './FavBadge';
 import '../styles/TopNavigationBar.scss'
 
 const TopNavigation = (props) => {
-  const topics = props.topics
+  const {topics, fav} = props
+
   return (
     <div className="top-nav-bar">
       <span className="top-nav-bar__logo">PhotoLabs</span>
       <TopicList topics={topics} />
-      {props.fav ? <FavBadge fav={props.fav} isFavPhotoExist /> : <FavBadge />}
+      {fav ? <FavBadge fav={fav} isFavPhotoExist /> : <FavBadge />}
     </div>
   )
 }
