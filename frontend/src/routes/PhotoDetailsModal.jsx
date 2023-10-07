@@ -2,36 +2,47 @@ import React from 'react';
 
 import '../styles/PhotoDetailsModal.scss'
 import closeSymbol from '../assets/closeSymbol.svg';
-import photos from 'mocks/photos';
+import PhotoList from 'components/PhotoList';
+import PhotoFavButton from 'components/PhotoFavButton';
 
 const PhotoDetailsModal = (props) => {
-  // const [...data] = props.photos.map(photo => photo);
+  const { modalVisible, setModalVisible, toggleFav, fav } = props
+
   const handleClick = () => {
-    props.setModalVisible(false);
+    setModalVisible(false);
   }
-  // console.log(props.photos[0].similar_photos);
-  // console.log(props.photos[0].urls.regular)
 
   return (
     <div className="photo-details-modal">
       <button className="photo-details-modal__close-button" onClick={handleClick}>
         <img src={closeSymbol} alt="close symbol" />
       </button>
-      <div className='photo-details-modal__top-bar'>
-        <img src={props.photos[1].urls.regular} alt="" className="photo-details-modal__image" />
-      </div>
-      <div className="photo-details-modal__photographer-details">
-        <img src={props.photos[0].user.profile} alt="" className="photo-details-modal__photographer-profile" />
-        <p className="photo-details-modal__photographer-info">
-          {props.photos[0].user.name}
-          <span className="photo-details-modal__photographer-location">
-            {props.photos[0].location.city}, {props.photos[0].location.country}
-          </span>
-        </p>
-      </div>
-      <div className='photo-details-modal__header'>
-        <h3>Similar Photos</h3>
-        <img src={props.photos[0].urls.regular} alt="" className="photo-details-modal__images" />
+
+      <div className="photo-details-modal__top-bar">
+        <div className="photo-details-modal__images">
+          <PhotoFavButton toggleFav={toggleFav} fav={fav} photoId={modalVisible.id} />
+          <img src={modalVisible.urls.full} className="photo-details-modal__image" />
+
+          <div className="photo-details-modal__photographer-details">
+            <img
+              src={modalVisible.user.profile}
+              className="photo-details-modal__photographer-profile"
+            />
+            <div className="photo-details-modal__photographer-info">
+              <span>{modalVisible.user.name}</span>
+              <br />
+              <span className="photo-details-modal__photographer-location">
+                {modalVisible.location.city}, {modalVisible.location.country}
+              </span>
+            </div>
+          </div>
+
+
+          <div className="photo-details-modal__header">
+            <h3>Similar Photos</h3>
+            <PhotoList photos={Object.values(modalVisible.similar_photos)} toggleFav={toggleFav} setModalVisible={setModalVisible} fav={fav} />
+          </div>
+        </div>
       </div>
     </div>
   )
