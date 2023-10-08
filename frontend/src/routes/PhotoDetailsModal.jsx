@@ -6,17 +6,18 @@ import PhotoList from 'components/PhotoList';
 import PhotoFavButton from 'components/PhotoFavButton';
 
 const PhotoDetailsModal = (props) => {
-  const { modalVisible, setModalVisible, toggleFav, fav, closeModal } = props
+  const { modalVisible, setPhotoSelected, updateToFavPhotoId, fav, onClosePhotoDetailsModal } = props
 
   return (
     <div className="photo-details-modal">
-      <button className="photo-details-modal__close-button" onClick={closeModal}>
+      <button className="photo-details-modal__close-button"
+        onClick={onClosePhotoDetailsModal}>
         <img src={closeSymbol} alt="close symbol" />
       </button>
 
       <div className="photo-details-modal__top-bar">
         <div className="photo-details-modal__images">
-          <PhotoFavButton toggleFav={toggleFav} fav={fav} photoId={modalVisible.id} />
+          <PhotoFavButton updateToFavPhotoId={updateToFavPhotoId} fav={fav} photoId={modalVisible.id} />
           <img src={modalVisible.urls.full} className="photo-details-modal__image" />
 
           <div className="photo-details-modal__photographer-details">
@@ -36,7 +37,7 @@ const PhotoDetailsModal = (props) => {
 
           <div className="photo-details-modal__header">
             <h3>Similar Photos</h3>
-            <PhotoList photos={Object.values(modalVisible.similar_photos)} toggleFav={toggleFav} setModalVisible={setModalVisible} fav={fav} />
+            <PhotoList photos={Object.values(modalVisible.similar_photos)} updateToFavPhotoId={updateToFavPhotoId} setPhotoSelected={setPhotoSelected} fav={fav} />
           </div>
         </div>
       </div>

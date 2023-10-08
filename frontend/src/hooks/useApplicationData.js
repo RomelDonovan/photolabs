@@ -1,27 +1,31 @@
 import { useState } from "react";
 
 const useApplicationData = () => {
-  const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisible, setModalVisible] = useState(null);
   const [fav, setFav] = useState([]);
 
-  const toggleFav = (photoId) => {
+  const updateToFavPhotoId = (photoId) => {
     if (fav.includes(photoId)) {
       const copyFavArr = [...fav].filter(favPhotoId => favPhotoId !== photoId)
-      setFav(copyFavArr);
-      return;
+      setFav(() => copyFavArr);
+      return; // Remove
     }
-    setFav(prev => [...prev, photoId]);
+    setFav(prev => [...prev, photoId]); // Add
   }
 
-  const closeModal = () => {
-    setModalVisible(false);
+  const setPhotoSelected = (photo) => {
+    setModalVisible(() => photo) // View
+  }
+
+  const onClosePhotoDetailsModal  = () => {
+    setModalVisible(false); // Close
   }
 
   return ({
     state: { modalVisible, fav },
-    setModalVisible, 
-    toggleFav,
-    closeModal
+    updateToFavPhotoId,
+    setPhotoSelected,
+    onClosePhotoDetailsModal,
   })
 }
 

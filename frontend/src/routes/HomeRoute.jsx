@@ -4,13 +4,13 @@ import TopNavigationBar from '../components/TopNavigationBar';
 import '../styles/HomeRoute.scss';
 
 const HomeRoute = (props) => {
-  const {photos, topics, setModalVisible, fav, toggleFav} = props
+  const {photos, topics, setPhotoSelected, fav, updateToFavPhotoId} = props
   
 
   return (
     <div className="home-route">
       <TopNavigationBar topics={topics} fav={fav}/>
-      <PhotoList photos={photos} toggleFav={toggleFav} setModalVisible={setModalVisible} fav={fav} />
+      <PhotoList photos={photos} updateToFavPhotoId={updateToFavPhotoId} setPhotoSelected={setPhotoSelected} fav={fav} />
     </div>
   );
 };

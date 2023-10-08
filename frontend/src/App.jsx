@@ -10,9 +10,9 @@ import './App.scss';
 const App = () => {
   const {
     state: { modalVisible, fav },
-    setModalVisible,
-    toggleFav,
-    closeModal
+    updateToFavPhotoId,
+    setPhotoSelected,
+    onClosePhotoDetailsModal,
   } = useApplicationData();
 
 
@@ -30,10 +30,10 @@ const App = () => {
 
   return (
     <div className="App">
-      <HomeRoute photos={photos} topics={topics} setModalVisible={setModalVisible} fav={fav} toggleFav={toggleFav} />
+      <HomeRoute photos={photos} topics={topics} setPhotoSelected={setPhotoSelected} fav={fav} updateToFavPhotoId={updateToFavPhotoId} />
 
       {modalVisible && (
-        <PhotoDetailsModal modalVisible={modalVisible} setModalVisible={setModalVisible} photos={photos} toggleFav={toggleFav} fav={fav} closeModal={closeModal} />
+        <PhotoDetailsModal modalVisible={modalVisible} setPhotoSelected={setPhotoSelected} photos={photos} updateToFavPhotoId={updateToFavPhotoId} fav={fav} onClosePhotoDetailsModal={onClosePhotoDetailsModal} />
       )}
     </div>
   );

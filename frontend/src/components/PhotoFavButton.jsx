@@ -4,13 +4,14 @@ import FavIcon from './FavIcon';
 import '../styles/PhotoFavButton.scss';
 
 function PhotoFavButton(props) {
-  const {toggleFav, photoId, fav} = props
-  const selected = fav.includes(photoId) 
+  const { updateToFavPhotoId, photoId, fav } = props
+  const selected = fav.includes(photoId)
 
   return (
-    <div className="photo-list__fav-icon" onClick={() => toggleFav(photoId)}>
+    <div className="photo-list__fav-icon"
+      onClick={() => updateToFavPhotoId(photoId)}>
       <div className="photo-list__fav-icon-svg">
-      <FavIcon selected={selected} />
+        <FavIcon selected={selected} />
       </div>
     </div>
   );
