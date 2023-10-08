@@ -11,7 +11,8 @@ const App = () => {
   const {
     state: { modalVisible, fav },
     setModalVisible,
-    toggleFav
+    toggleFav,
+    closeModal
   } = useApplicationData();
 
 
@@ -32,7 +33,7 @@ const App = () => {
       <HomeRoute photos={photos} topics={topics} setModalVisible={setModalVisible} fav={fav} toggleFav={toggleFav} />
 
       {modalVisible && (
-        <PhotoDetailsModal modalVisible={modalVisible} setModalVisible={setModalVisible} photos={photos} toggleFav={toggleFav} fav={fav} />
+        <PhotoDetailsModal modalVisible={modalVisible} setModalVisible={setModalVisible} photos={photos} toggleFav={toggleFav} fav={fav} closeModal={closeModal} />
       )}
     </div>
   );

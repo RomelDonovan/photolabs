@@ -13,10 +13,15 @@ const useApplicationData = () => {
     setFav(prev => [...prev, photoId]);
   }
 
+  const closeModal = () => {
+    setModalVisible(false);
+  }
+
   return ({
     state: { modalVisible, fav },
     setModalVisible, 
-    toggleFav
+    toggleFav,
+    closeModal
   })
 }
 

@@ -6,15 +6,11 @@ import PhotoList from 'components/PhotoList';
 import PhotoFavButton from 'components/PhotoFavButton';
 
 const PhotoDetailsModal = (props) => {
-  const { modalVisible, setModalVisible, toggleFav, fav } = props
-
-  const handleClick = () => {
-    setModalVisible(false);
-  }
+  const { modalVisible, setModalVisible, toggleFav, fav, closeModal } = props
 
   return (
     <div className="photo-details-modal">
-      <button className="photo-details-modal__close-button" onClick={handleClick}>
+      <button className="photo-details-modal__close-button" onClick={closeModal}>
         <img src={closeSymbol} alt="close symbol" />
       </button>
 
