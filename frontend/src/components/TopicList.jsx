@@ -2,12 +2,17 @@ import React from "react";
 import TopicListItem from "./TopicListItem";
 import "../styles/TopicList.scss";
 
-const TopicList = (props) => {
-  const {topicData, onTopicSelect} = props
-  
+const TopicList = ({ topicData, onTopicSelect }) => {
+
   return (
     <div className="top-nav-bar__topic-list">
-      {topicData.map(topic => <TopicListItem key={topic.id} {...topic} onTopicSelect={onTopicSelect} />)}
+      {topicData.map(topic => (
+        <TopicListItem
+          key={topic.id}
+          {...topic}
+          onTopicSelect={onTopicSelect}
+        />
+      ))}
     </div>
   );
 };

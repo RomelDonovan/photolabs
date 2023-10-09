@@ -1,5 +1,6 @@
 import { useReducer, useEffect } from "react";
 
+// Define action types
 export const ACTIONS = {
   FAV_PHOTO_ADDED: "FAV_PHOTO_ADDED",
   FAV_PHOTO_REMOVED: "FAV_PHOTO_REMOVED",
@@ -16,20 +17,20 @@ const initialState = {
   topicData: []
 }
 
-// function to change that state
+// Reducer to update the state based on actions
 const reducer = (state, action) => {
   switch (action.type) {
-    case "FAV_PHOTO_ADDED":
+    case ACTIONS.FAV_PHOTO_ADDED:
       return { ...state, fav: [...state.fav, action.payload] };
-    case "FAV_PHOTO_REMOVED":
+    case ACTIONS.FAV_PHOTO_REMOVED:
       return { ...state, fav: state.fav.filter(photoId => photoId !== action.payload) };
-    case "SELECT_PHOTO":
+    case ACTIONS.SELECT_PHOTO:
       return { ...state, modalVisible: action.payload };
-    case 'SET_PHOTO_DATA':
+    case ACTIONS.SET_PHOTO_DATA:
       return { ...state, photoData: action.payload };
-    case 'SET_TOPIC_DATA':
+    case ACTIONS.SET_TOPIC_DATA:
       return { ...state, topicData: action.payload };
-    case "CLOSE_PHOTO":
+    case ACTIONS.CLOSE_PHOTO:
       return { ...state, modalVisible: null };
     default:
       throw new Error(`Tried to reduce with unsupported action type: ${action.type}`);
@@ -41,6 +42,7 @@ const useApplicationData = () => {
 
   const { modalVisible, fav, photoData, topicData } = state;
 
+  // Function to update favorite photo
   const updateToFavPhotoId = (photoId) => {
     if (state.fav.includes(photoId)) {
       dispatch({ type: ACTIONS.FAV_PHOTO_REMOVED, payload: photoId });
@@ -49,30 +51,38 @@ const useApplicationData = () => {
     }
   }
 
+  // Function to set selected photo
   const setPhotoSelected = (photo) => {
     dispatch({ type: ACTIONS.SELECT_PHOTO, payload: photo });
   }
 
+  // Function to close photo details modal
   const onClosePhotoDetailsModal = () => {
     dispatch({ type: ACTIONS.CLOSE_PHOTO });
   }
 
+  // Function to handle topic selection
   const onTopicSelect = (topic_id) => {
     fetch(`/api/topics/photos/${topic_id}`)
       .then((response) => response.json())
-      .then((data) => dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: data }));
+      .then((data) => dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: data }))
+      .catch((error) => console.error("Error fetching photo data:", error));
   };
 
+  // Fetch initial photo data on component mount
   useEffect(() => {
     fetch("/api/photos")
       .then((response) => response.json())
       .then((data) => dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: data }))
+      .catch((error) => console.error("Error fetching photos:", error));
   }, []);
 
+  // Fetch initial topic data on component mount
   useEffect(() => {
     fetch("/api/topics")
       .then((response) => response.json())
       .then((data) => dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: data }))
+      .catch((error) => console.error("Error fetching topics:", error));
   }, []);
 
   return ({

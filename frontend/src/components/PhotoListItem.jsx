@@ -2,12 +2,14 @@ import React from "react";
 import "../styles/PhotoListItem.scss";
 import PhotoFavButton from "./PhotoFavButton";
 
-const PhotoListItem = (props) => {
-  const { photo, updateToFavPhotoId, setPhotoSelected, fav } = props
-
+const PhotoListItem = ({ photo, updateToFavPhotoId, setPhotoSelected, fav }) => {
   return (
     <div className="photo-list__item">
-      <PhotoFavButton updateToFavPhotoId={updateToFavPhotoId} photoId={photo.id} fav={fav} />
+      <PhotoFavButton
+        updateToFavPhotoId={updateToFavPhotoId}
+        photoId={photo.id} fav={fav}
+      />
+
       <img src={photo.urls.regular} alt="" className="photo-list__image" onClick={() => setPhotoSelected(photo)} />
       <div className="photo-list__user-details">
         <img src={photo.user.profile} alt="" className="photo-list__user-profile" />
@@ -17,7 +19,7 @@ const PhotoListItem = (props) => {
         </p>
       </div>
     </div>
-  )
+  );
 };
 
 export default PhotoListItem;
