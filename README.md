@@ -1,8 +1,12 @@
-# react-photolabs
-The PhotoLabs project for the Web Development React course programming.
-
 # Photolabs
+PhotoLabs is a React-based single-page application (SPA) that allows users to view photos in different contexts.
 
+# Final Product
+![Homepage](</frontend/docs/home_page.png>)
+![Modal View](</frontend/docs/modal_view.png>)
+![Similar Photo](</frontend/docs/similar_photo_view.png>)
+![People Category](</frontend/docs/people_topic.png>)
+# Getting Started
 ## Setup
 
 Install dependencies with `npm install` in each respective `/frontend` and `/backend`.
@@ -22,3 +26,22 @@ Read `backend/readme` for further setup details.
 cd backend
 npm start
 ```
+# Dependencies
+### Frontend
+- react
+- react-dom
+- react-scripts
+- web-vitals
+- sass
+
+### Backend
+- body-parser
+- cors
+- dotenv
+- express
+- helmet
+- pg
+- socket.io
+- ws
+- jest
+- supertest
