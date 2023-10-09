@@ -6,7 +6,14 @@ import PhotoList from 'components/PhotoList';
 import PhotoFavButton from 'components/PhotoFavButton';
 
 const PhotoDetailsModal = (props) => {
-  const { modalVisible, setPhotoSelected, updateToFavPhotoId, fav, onClosePhotoDetailsModal } = props
+  const { modalVisible, setPhotoSelected, updateToFavPhotoId, fav, onClosePhotoDetailsModal, photoData } = props
+
+  const similarPhotos = Object.values(modalVisible.similar_photos);
+
+  const similarPhotosWithDetails = similarPhotos.map(photo => {
+    const photoObj = photoData.find(ph => ph.id === photo.id);
+    return photoObj;
+  })
 
   return (
     <div className="photo-details-modal">
@@ -34,10 +41,9 @@ const PhotoDetailsModal = (props) => {
             </div>
           </div>
 
-
           <div className="photo-details-modal__header">
             <h3>Similar Photos</h3>
-            <PhotoList photoData={Object.values(modalVisible.similar_photos)} updateToFavPhotoId={updateToFavPhotoId} setPhotoSelected={setPhotoSelected} fav={fav} />
+            <PhotoList photoData={similarPhotosWithDetails} updateToFavPhotoId={updateToFavPhotoId} setPhotoSelected={setPhotoSelected} fav={fav} />
           </div>
         </div>
       </div>
