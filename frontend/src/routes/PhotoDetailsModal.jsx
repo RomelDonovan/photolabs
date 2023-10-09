@@ -37,7 +37,7 @@ const PhotoDetailsModal = (props) => {
 
           <div className="photo-details-modal__header">
             <h3>Similar Photos</h3>
-            <PhotoList photos={Object.values(modalVisible.similar_photos)} updateToFavPhotoId={updateToFavPhotoId} setPhotoSelected={setPhotoSelected} fav={fav} />
+            <PhotoList photoData={Object.values(modalVisible.similar_photos)} updateToFavPhotoId={updateToFavPhotoId} setPhotoSelected={setPhotoSelected} fav={fav} />
           </div>
         </div>
       </div>
