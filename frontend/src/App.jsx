@@ -11,12 +11,12 @@ const App = () => {
     updateToFavPhotoId,
     setPhotoSelected,
     onClosePhotoDetailsModal,
-    photosByTopic
+    onTopicSelect
   } = useApplicationData();
 
   return (
     <div className="App">
-      <HomeRoute photoData={photoData} topicData={topicData} setPhotoSelected={setPhotoSelected} fav={fav} updateToFavPhotoId={updateToFavPhotoId} photosByTopic={photosByTopic} />
+      <HomeRoute photoData={photoData} topicData={topicData} setPhotoSelected={setPhotoSelected} fav={fav} updateToFavPhotoId={updateToFavPhotoId} onTopicSelect={onTopicSelect} />
 
       {modalVisible && (
         <PhotoDetailsModal modalVisible={modalVisible} setPhotoSelected={setPhotoSelected} photoData={photoData} updateToFavPhotoId={updateToFavPhotoId} fav={fav} onClosePhotoDetailsModal={onClosePhotoDetailsModal} />
