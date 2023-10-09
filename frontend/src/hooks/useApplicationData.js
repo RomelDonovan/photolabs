@@ -1,10 +1,17 @@
-import { useReducer } from "react";
+import { useReducer, useEffect } from "react";
+
+const initialState = {
+  modalVisible: null,
+  fav: [],
+  photoData: [],
+  topicData: []
+}
 
 export const ACTIONS = {
   FAV_PHOTO_ADDED: "FAV_PHOTO_ADDED",
   FAV_PHOTO_REMOVED: "FAV_PHOTO_REMOVED",
-  // SET_PHOTO_DATA: "SET_PHOTO_DATA",
-  // SET_TOPIC_DATA: "SET_TOPIC_DATA",
+  SET_PHOTO_DATA: "SET_PHOTO_DATA",
+  SET_TOPIC_DATA: "SET_TOPIC_DATA",
   SELECT_PHOTO: "SELECT_PHOTO",
   CLOSE_PHOTO: "CLOSE_PHOTO"
   // DISPLAY_PHOTO_DETAILS: "DISPLAY_PHOTO_DETAILS"
@@ -19,6 +26,10 @@ const reducer = (state, action) => {
       return { ...state, fav: state.fav.filter(photoId => photoId !== action.payload) };
     case "SELECT_PHOTO":
       return { ...state, modalVisible: action.payload };
+    case 'SET_PHOTO_DATA':
+      return { ...state, photoData: action.payload };
+    case 'SET_TOPIC_DATA':
+      return { ...state, topicData: action.payload };
     case "CLOSE_PHOTO":
       return { ...state, modalVisible: null };
     default:
@@ -27,12 +38,9 @@ const reducer = (state, action) => {
 }
 
 const useApplicationData = () => {
-  const [state, dispatch] = useReducer(reducer, {
-    modalVisible: null,
-    fav: []
-  });
-  
-  const { modalVisible, fav } = state;
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  const { modalVisible, fav, photoData, topicData } = state;
 
   const updateToFavPhotoId = (photoId) => {
     if (state.fav.includes(photoId)) {
@@ -50,8 +58,20 @@ const useApplicationData = () => {
     dispatch({ type: ACTIONS.CLOSE_PHOTO });
   }
 
+  useEffect(() => {
+    fetch("/api/photos")
+      .then((response) => response.json())
+      .then((data) => dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: data }))
+  }, []);
+
+  useEffect(() => {
+    fetch("/api/topics")
+      .then((response) => response.json())
+      .then((data) => dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: data }))
+  }, []);
+
   return ({
-    state: { modalVisible, fav },
+    state: { modalVisible, fav, photoData, topicData },
     updateToFavPhotoId,
     setPhotoSelected,
     onClosePhotoDetailsModal,
